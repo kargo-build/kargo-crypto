@@ -7,9 +7,6 @@ Add the dependency to your `kargo.toml` (or equivalent):
 
 ```yaml
 sources:
-  - github: kargo-build/kargo-env
-    version: 1.0.0
-
   - github: kargo-build/kargo-crypto
     version: 1.0.0
 ```
