@@ -1,0 +1,10 @@
+product:
+  type: lib
+  platforms: [linuxX64, jvm]
+
+test-dependencies:
+  - org.jetbrains.kotlin:kotlin-test:2.0.0
+
+settings:
+  kotlin:
+    freeCompilerArgs: [ -Xexpect-actual-classes ]
