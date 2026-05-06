@@ -1,4 +1,4 @@
-package build.kargo.crypto
+package builders.kargo.crypto
 
 object Hmac {
     private const val BLOCK_SIZE = 64

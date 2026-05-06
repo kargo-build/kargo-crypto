@@ -1,4 +1,4 @@
-package build.kargo.crypto
+package builders.kargo.crypto
 
 internal object Sha256 {
 

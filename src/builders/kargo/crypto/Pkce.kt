@@ -1,4 +1,6 @@
-package build.kargo.crypto
+package builders.kargo.crypto
+
+import builders.kargo.crypto.Encoding
 
 object Pkce {
 

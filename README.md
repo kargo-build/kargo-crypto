@@ -29,7 +29,7 @@ Core cryptographic primitives for Kotlin Multiplatform, including secure random 
 ### Random bytes
 
 ```kotlin
-import build.kargo.crypto.Crypto
+import builders.kargo.crypto.Crypto
 
 val bytes = Crypto.randomBytes(32)
 ```
@@ -55,7 +55,7 @@ val signature = Crypto.hmacSha256Hex("data", "secret-key")
 ### Encoding
 
 ```kotlin
-import build.kargo.crypto.Encoding
+import builders.kargo.crypto.Encoding
 
 val hexString = Encoding.hex(byteArrayOf(0xDE.toByte(), 0xAD.toByte())) // "dead"
 ```
@@ -65,7 +65,7 @@ val hexString = Encoding.hex(byteArrayOf(0xDE.toByte(), 0xAD.toByte())) // "dead
 ### PKCE (OAuth 2.0)
 
 ```kotlin
-import build.kargo.crypto.Pkce
+import builders.kargo.crypto.Pkce
 
 val verifier = Pkce.generateVerifier()
 val challenge = Pkce.generateChallenge(verifier)

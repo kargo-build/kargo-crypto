@@ -1,10 +1,10 @@
-package build.kargo.crypto
+package builders.kargo.crypto
 
 import kotlinx.cinterop.*
 import platform.posix.*
 
 @ExperimentalForeignApi
-actual fun randomBytes(length: Int): ByteArray {
+actual fun exRandomBytes(length: Int): ByteArray {
     val bytes = ByteArray(length)
     val file = fopen("/dev/urandom", "rb") ?: error("Cannot open /dev/urandom")
 

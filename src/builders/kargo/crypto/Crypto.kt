@@ -1,10 +1,10 @@
-package build.kargo.crypto
+package builders.kargo.crypto
 
-expect fun randomBytes(length: Int): ByteArray
+expect fun exRandomBytes(length: Int): ByteArray
 
 object Crypto {
 
-    fun randomBytes(length: Int): ByteArray = build.kargo.crypto.randomBytes(length)
+    fun randomBytes(length: Int): ByteArray = exRandomBytes(length)
 
     fun sha256(bytes: ByteArray): ByteArray = Sha256.hash(bytes)
 
