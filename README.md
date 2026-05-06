@@ -1,26 +1,27 @@
 # kargo-crypto
 
-
 ## 📦 Installation
 
-Add the dependency to your `kargo.toml` (or equivalent):
+Add the dependency to your `module.yaml` (or equivalent):
 
 ```yaml
 sources:
   - github: kargo-build/kargo-crypto
-    version: 1.0.0
+    version: 1.1.0
 ```
 
 > Uses Kargo dependency manager. Versions follow semantic versioning.
 
-Core cryptographic primitives for Kotlin Multiplatform, including secure random generation, SHA-256 hashing, and PKCE helpers. Designed for performance, safety, and clean API design.
+Core cryptographic primitives for Kotlin Multiplatform, including secure random generation, SHA-256 hashing, HMAC-SHA256, and PKCE helpers. Designed for performance, safety, and clean API design.
 
 ## ✨ Features
 
 - Multiplatform (JVM + Native)
 - Secure random generation
 - SHA-256 hashing (pure Kotlin)
+- HMAC-SHA256 support
 - OAuth 2.0 PKCE helpers
+- Hex and Base64Url encoding helpers
 - Zero external dependencies
 
 ## 🚀 Usage
@@ -28,7 +29,7 @@ Core cryptographic primitives for Kotlin Multiplatform, including secure random 
 ### Random bytes
 
 ```kotlin
-import kargo.crypto.Crypto
+import build.kargo.crypto.Crypto
 
 val bytes = Crypto.randomBytes(32)
 ```
@@ -43,10 +44,28 @@ val hash = Crypto.sha256("hello world")
 
 ---
 
+### HMAC-SHA256
+
+```kotlin
+val signature = Crypto.hmacSha256Hex("data", "secret-key")
+```
+
+---
+
+### Encoding
+
+```kotlin
+import build.kargo.crypto.Encoding
+
+val hexString = Encoding.hex(byteArrayOf(0xDE.toByte(), 0xAD.toByte())) // "dead"
+```
+
+---
+
 ### PKCE (OAuth 2.0)
 
 ```kotlin
-import kargo.crypto.Pkce
+import build.kargo.crypto.Pkce
 
 val verifier = Pkce.generateVerifier()
 val challenge = Pkce.generateChallenge(verifier)
@@ -58,6 +77,7 @@ val challenge = Pkce.generateChallenge(verifier)
 
 - `randomBytes` is platform-specific (`expect/actual`)
 - SHA-256 is implemented in pure Kotlin (common)
+- HMAC-SHA256 is built on top of core primitives
 - PKCE is built on top of core primitives
 - No OpenSSL or native crypto bindings
 
@@ -75,6 +95,7 @@ val challenge = Pkce.generateChallenge(verifier)
 - Suitable for:
     - hashing
     - tokens
+    - HMAC signatures
     - OAuth PKCE
 
 - Not intended for:
@@ -84,6 +105,5 @@ val challenge = Pkce.generateChallenge(verifier)
 
 ## 🔮 Roadmap
 
-- HMAC support
 - Additional hash algorithms (SHA-512)
-- Encoding helpers
+- AEAD support (maybe)

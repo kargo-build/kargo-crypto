@@ -13,4 +13,8 @@ object Encoding {
     fun base64UrlNoPadding(bytes: ByteArray): String {
         return base64Url(bytes).trimEnd('=')
     }
+
+    fun hex(bytes: ByteArray): String = bytes.joinToString("") {
+        (it.toInt() and 0xFF).toString(16).padStart(2, '0')
+    }
 }
