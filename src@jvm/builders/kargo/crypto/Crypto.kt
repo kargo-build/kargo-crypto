@@ -9,3 +9,7 @@ actual fun exRandomBytes(length: Int): ByteArray {
     random.nextBytes(bytes)
     return bytes
 }
+
+actual fun exSignEcdsaP256(dataToSign: String, privateKeyPem: String): String {
+    throw UnsupportedOperationException("ECDSA P-256 not implemented on JVM wrapper yet")
+}

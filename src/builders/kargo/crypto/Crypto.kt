@@ -1,6 +1,7 @@
 package builders.kargo.crypto
 
 expect fun exRandomBytes(length: Int): ByteArray
+expect fun exSignEcdsaP256(dataToSign: String, privateKeyPem: String): String
 
 object Crypto {
 
@@ -15,4 +16,6 @@ object Crypto {
     fun hmacSha256(data: String, key: String): ByteArray = Hmac.sha256(data, key)
 
     fun hmacSha256Hex(data: String, key: String): String = Encoding.hex(hmacSha256(data, key))
+
+    fun signEcdsaP256(dataToSign: String, privateKeyPem: String): String = exSignEcdsaP256(dataToSign, privateKeyPem)
 }

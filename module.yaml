@@ -8,3 +8,10 @@ test-dependencies:
 settings:
   kotlin:
     freeCompilerArgs: [ -Xexpect-actual-classes ]
+
+settings@linuxX64:
+  native:
+    cinterop:
+      libcrypto:
+        defFile: resources/cinterop/libcrypto.def
+        packageName: libcrypto

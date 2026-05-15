@@ -7,7 +7,7 @@ Add the dependency to your `module.yaml` (or equivalent):
 ```yaml
 sources:
   - github: kargo-build/kargo-crypto
-    version: 1.1.0
+    version: 1.2.0
 ```
 
 > Uses Kargo dependency manager. Versions follow semantic versioning.
@@ -17,12 +17,12 @@ Core cryptographic primitives for Kotlin Multiplatform, including secure random 
 ## ✨ Features
 
 - Multiplatform (JVM + Native)
-- Secure random generation
+- Secure random generation (via OpenSSL on Linux)
 - SHA-256 hashing (pure Kotlin)
 - HMAC-SHA256 support
+- ECDSA P-256 (ES256) signature generation (native C-interop)
 - OAuth 2.0 PKCE helpers
 - Hex and Base64Url encoding helpers
-- Zero external dependencies
 
 ## 🚀 Usage
 
@@ -52,6 +52,18 @@ val signature = Crypto.hmacSha256Hex("data", "secret-key")
 
 ---
 
+### ECDSA P-256 Signatures (JWT/VAPID)
+
+```kotlin
+// Generates an IEEE 1363 (R|S) 64-byte signature encoded in Base64Url
+val jwtSignature = Crypto.signEcdsaP256(
+    dataToSign = "eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIxMjM0In0",
+    privateKeyPem = "-----BEGIN EC PRIVATE KEY-----\n..."
+)
+```
+
+---
+
 ### Encoding
 
 ```kotlin
@@ -75,18 +87,18 @@ val challenge = Pkce.generateChallenge(verifier)
 
 ## 🧠 Design
 
-- `randomBytes` is platform-specific (`expect/actual`)
+- `randomBytes` is platform-specific (`expect/actual` using OpenSSL `RAND_bytes` on Linux)
 - SHA-256 is implemented in pure Kotlin (common)
 - HMAC-SHA256 is built on top of core primitives
 - PKCE is built on top of core primitives
-- No OpenSSL or native crypto bindings
+- ECDSA P-256 uses highly-optimized OpenSSL C-Interop on Native (`libcrypto`)
 
 ---
 
 ## ⚙️ Platform implementations
 
 - JVM → `SecureRandom`
-- Native → system entropy source (`/dev/urandom` or equivalent)
+- Native (LinuxX64) → Native bindings to OpenSSL (`libcrypto`)
 
 ---
 
